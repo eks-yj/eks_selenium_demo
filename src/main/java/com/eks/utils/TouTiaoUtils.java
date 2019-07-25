@@ -55,8 +55,7 @@ public class TouTiaoUtils {
     public static void click(WebDriver webDriver,int xOffset, int yOffset){
         Actions actions = new Actions(webDriver);
         WebElement webElement = webDriver.findElement(By.cssSelector("body"));
-        actions.moveToElement(webElement,0,0);
-        actions.moveByOffset(xOffset,yOffset).click();
+        actions.moveToElement(webElement,xOffset,yOffset).click();
         actions.release();
         actions.perform();
     }
