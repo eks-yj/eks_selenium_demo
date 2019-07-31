@@ -43,7 +43,7 @@ public class TouTiaoUtils {
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".name")));
 
         cookieSet = options.getCookies();
-        if (cookieSet != null){
+        if (cookieSet != null && cookieSet.size() > 0){
             SerializeUtils.writeObject(cookieSetPathString,cookieSet);
         }
         return webDriver;

@@ -19,6 +19,7 @@ public class SerializeUtils {
             AutoCloseableUtils.close(fileOutputStream);
         }
     }
+    @SuppressWarnings("unchecked")
     public static <T> T readObject(String filePathString){
         ObjectInputStream objectInputStream = null;
         FileInputStream fileInputStream = null;
