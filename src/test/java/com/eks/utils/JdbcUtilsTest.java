@@ -26,4 +26,11 @@ public class JdbcUtilsTest {
         sqlStringList.add(sqlString);
         JdbcUtils.updateByJdbc(DatabaseDriverEnum.SQLITE,urlString,null,null,sqlStringList);
     }
+    @Test
+    public void test3() throws Exception {
+        String urlString = "jdbc:mysql://127.0.0.1:3306/eks_ad_demo?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=false";
+        String sqlString = "SELECT id,goods_id_string,mini_program_image_url_string,we_chat_long_url_string FROM eks_ad_demo";
+        JsonArray jsonArray = JdbcUtils.queryJsonArrayByJdbc(DatabaseDriverEnum.MYSQL,urlString,"root","root",sqlString);
+        System.out.println(jsonArray.toString());
+    }
 }

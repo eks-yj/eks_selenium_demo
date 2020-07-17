@@ -1,4 +1,4 @@
-package com.eks;
+package com.eks.thread;
 
 import com.eks.utils.SeleniumUtils2;
 import lombok.Data;

@@ -30,7 +30,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.0.0-alpha-2</version>
+            <version>3.4.0</version>
         </dependency>
         <!--gson-->
         <dependency>
@@ -51,6 +51,12 @@
             <version>3.17</version>
         </dependency>
         <!--lombok-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.38</version>
+        </dependency>
+        <!--免去书写get、set等方法-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

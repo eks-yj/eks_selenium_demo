@@ -1,7 +1,7 @@
 package com.eks.utils;
 
-import com.eks.PinDuoDuoThread;
-import com.eks.PinDuoDuoThread2;
+import com.eks.thread.PinDuoDuoThread;
+import com.eks.thread.PinDuoDuoThread2;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.event.KeyEvent;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
@@ -145,5 +146,37 @@ public class PinDuoDuoUtilsTest {
             SeleniumUtils2.clickByJs(webDriver,"#__next > div.jsx-1070787851.container > main > div.single-promotion-wrapper.main-content > div.share-info-wrapper > div > div > div.btn-wrapper > div:nth-child(2)");
             Thread.sleep(10000);
         }
+    }
+    @Test
+    public void test5() throws InterruptedException {
+        WebDriver webDriver = SeleniumUtils2.getWebDriver();
+        String cookieFileNameString = SeleniumUtils2.loginByCookie(webDriver, "https://jinbao.pinduoduo.com/promotion/single-promotion");
+        //登录名称
+        Boolean loginBoolean = SeleniumUtils2.checkLogin(webDriver, 30, "#__next > div.jsx-1070787851.container > section > div > div.jsx-322011365.login-wrapper.right > div > span.jsx-322011365.welcome-text");
+        if (loginBoolean){
+            SeleniumUtils2.writeCookieToFile(webDriver,cookieFileNameString);
+        }
+        Thread.sleep(2000);
+        //知道了
+        SeleniumUtils2.click(webDriver,".animation.button");
+        //立即推广
+        List<WebElement> webElementList = SeleniumUtils.findElements(webDriver, "#__next > div.jsx-1070787851.container > main > div.single-promotion-wrapper.main-content > div.single-promotion-list > a:nth-child(1) > div > div > div.goods-info > div.sale-info > div.btn");
+        SeleniumUtils2.click(webDriver,webElementList.get(0));
+        Thread.sleep(2000);
+        //确定
+        SeleniumUtils2.click(webDriver,"#__next > div.jsx-1070787851.container > main > div.single-promotion-wrapper.main-content > div.pid-modal-wrapper > div > div.content > div.btn-wrapper > div:nth-child(1)");
+        Thread.sleep(2000);
+        //双人团
+        SeleniumUtils2.click(webDriver,"#__next > div.jsx-1070787851.container > main > div.single-promotion-wrapper.main-content > div.share-info-wrapper > div > div > div.tab > ul:nth-child(2) > li:nth-child(1)");
+        Thread.sleep(2000);
+        //小程序
+        SeleniumUtils2.click(webDriver,"#__next > div.jsx-1070787851.container > main > div.single-promotion-wrapper.main-content > div.share-info-wrapper > div > div > div.tab > ul:nth-child(1) > li:nth-child(5)");
+        Thread.sleep(5000);
+        //复制图片
+        SeleniumUtils2.click(webDriver,"#copy-img-btn");
+        RobotUtils.clickMouse(500,500, 2277, 284);
+        RobotUtils.pressKey(500, false, KeyEvent.VK_CONTROL,KeyEvent.VK_V);
+        RobotUtils.pressKey(500, true,KeyEvent.VK_ENTER);
+        while (true){}
     }
 }
