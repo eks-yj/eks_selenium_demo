@@ -27,7 +27,7 @@ public class TouTiaoUtilsTest {
         WebElement webElement = webDriver.findElement(By.cssSelector(".show-image-uploader.show-uploader"));
         webElement.click();
         Thread.sleep(3000);
-        String filePathString = FileUtils.generatePathBaseProjectPath("extra/image/gratisography/gratisography-157H.jpg");
+        String filePathString = FileUtils.getPathBaseProjectPath("extra/image/gratisography/gratisography-157H.jpg");
         TouTiaoUtils.sendKeys(webDriver, "#fileElem",filePathString);
         Thread.sleep(3000);
         WebDriver.Options options = webDriver.manage();

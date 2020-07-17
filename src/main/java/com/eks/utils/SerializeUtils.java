@@ -3,7 +3,7 @@ package com.eks.utils;
 import java.io.*;
 
 public class SerializeUtils {
-    public static void writeObject(String filePathString,Object object){
+    public static void writeObject(String filePathString, Object object){
         FileOutputStream fileOutputStream = null;
         ObjectOutputStream objectOutputStream = null;
         try {

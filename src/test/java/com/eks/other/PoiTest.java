@@ -31,7 +31,7 @@ public class PoiTest {
     }
     @Test
     public void test1() throws Exception {
-        String filePathString = FileUtils.generatePathBaseProjectPath("extra/xlsx/eks_dictum_note.xls");
+        String filePathString = FileUtils.getPathBaseProjectPath("extra/xlsx/eks_dictum_note.xls");
         //创建输入流，接受目标excel文件
         FileInputStream fileInputStream = new FileInputStream(filePathString);
         //得到POI文件系统对象
@@ -60,7 +60,7 @@ public class PoiTest {
         for(String sqlString : sqlStringList){
             System.out.println(sqlString);
         }
-        String dbFilePathString = FileUtils.generatePathBaseProjectPath("extra/db/sqlite.db");
+        String dbFilePathString = FileUtils.getPathBaseProjectPath("extra/db/sqlite.db");
         String urlString = "jdbc:sqlite:" + dbFilePathString;
         int[] updateCountIntArray = JdbcUtils.updateByJdbc(DatabaseDriverEnum.SQLITE, urlString, null, null, sqlStringList);
         if (updateCountIntArray != null){
