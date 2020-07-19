@@ -47,9 +47,9 @@ public class PinDuoDuoUtilsTest {
         SeleniumUtils2.click(webDriver,"#copy-img-btn");
         //存储图片
         String companyNameString = SeleniumUtils2.getCompanyName(urlString);
-        String basalFilePathString = FileUtils.getPathBaseProjectPath("extra/image/" + companyNameString + "/");
+        String basalFilePathString = EksFileUtils.getPathBaseProject("extra/image/" + companyNameString + "/");
         Image image = ClipboardUtils.getClipboardImage();
-        String newFilePathString = FileUtils.getPathBaseProjectPath(basalFilePathString + "temp.png");
+        String newFilePathString = EksFileUtils.getPathBaseProject(basalFilePathString + "temp.png");
         ImageIO.write((RenderedImage) image, "png", new File(newFilePathString));
         while (true){}
     }
@@ -160,7 +160,7 @@ public class PinDuoDuoUtilsTest {
         //知道了
         SeleniumUtils2.click(webDriver,".animation.button");
         //立即推广
-        List<WebElement> webElementList = SeleniumUtils.findElements(webDriver, "#__next > div.jsx-1070787851.container > main > div.single-promotion-wrapper.main-content > div.single-promotion-list > a:nth-child(1) > div > div > div.goods-info > div.sale-info > div.btn");
+        List<WebElement> webElementList = SeleniumUtils.findElementsByCss(webDriver, "#__next > div.jsx-1070787851.container > main > div.single-promotion-wrapper.main-content > div.single-promotion-list > a:nth-child(1) > div > div > div.goods-info > div.sale-info > div.btn");
         SeleniumUtils2.click(webDriver,webElementList.get(0));
         Thread.sleep(2000);
         //确定

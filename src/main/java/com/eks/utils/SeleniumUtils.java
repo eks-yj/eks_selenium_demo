@@ -22,6 +22,7 @@ public class SeleniumUtils {
         List<String> argumentStringList = new ArrayList<>();
         if (headlessBoolean != null && headlessBoolean){
             argumentStringList.add("--headless");
+            argumentStringList.add("--disable-gpu");
         }
         ChromeDriverService.Builder builder = new ChromeDriverService.Builder();
         if (StringUtils.isNotBlank(whitelistedIpsString)){
@@ -45,10 +46,16 @@ public class SeleniumUtils {
     public static Object executeScript(WebDriver webDriver, String scriptString){
         return ((JavascriptExecutor)webDriver).executeScript(scriptString);
     }
-    public static WebElement findElement(SearchContext searchContext, String cssSelectorString){
+    public static WebElement findElementByCss(SearchContext searchContext, String cssSelectorString){
         return searchContext.findElement(By.cssSelector(cssSelectorString));
     }
-    public static List<WebElement> findElements(SearchContext searchContext, String cssSelectorString){
+    public static List<WebElement> findElementsByCss(SearchContext searchContext, String cssSelectorString){
         return searchContext.findElements(By.cssSelector(cssSelectorString));
+    }
+    public static WebElement findElementByClassName(SearchContext searchContext, String classNameString){
+        return searchContext.findElement(By.className(classNameString));
+    }
+    public static List<WebElement> findElementsByClassName(SearchContext searchContext, String classNameString){
+        return searchContext.findElements(By.className(classNameString));
     }
 }

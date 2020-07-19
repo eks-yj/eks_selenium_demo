@@ -14,9 +14,9 @@ import java.util.Set;
 public class TouTiaoUtils {
     private static String cookieSetPathString = null;
     static {
-        String filePathString = FileUtils.getPathBaseProjectPath("extra/driver/chromedriver_win32/chromedriver.exe");
+        String filePathString = EksFileUtils.getPathBaseProject("extra/driver/chromedriver_win32/chromedriver.exe");
         System.setProperty(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY,filePathString);
-        cookieSetPathString = FileUtils.getPathBaseProjectPath("extra/object/cookieSet");
+        cookieSetPathString = EksFileUtils.getPathBaseProject("extra/object/cookieSet");
     }
     public static WebDriver login(List<String> argumentStringList){
         String[] argumentStringArray = argumentStringList.toArray(new String[argumentStringList.size()]);

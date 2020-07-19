@@ -15,9 +15,9 @@ import java.util.Set;
 public class SeleniumUtils2 {
     private static String basalCookieSetPathString = null;
     static {
-        String filePathString = FileUtils.getPathBaseProjectPath("extra/driver/chromedriver_win32/chromedriver.exe");
+        String filePathString = EksFileUtils.getPathBaseProject("extra/driver/chromedriver_win32/chromedriver.exe");
         System.setProperty(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY,filePathString);
-        basalCookieSetPathString = FileUtils.getPathBaseProjectPath("extra/cookie/");
+        basalCookieSetPathString = EksFileUtils.getPathBaseProject("extra/cookie/");
     }
     public static WebDriver getWebDriver(){
         List<String> argumentStringList = new ArrayList<>();
