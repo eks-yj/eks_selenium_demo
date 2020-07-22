@@ -1,6 +1,9 @@
 package com.eks.utils;
 
+import lombok.Cleanup;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.util.Units;
 import org.apache.poi.xwpf.model.XWPFHeaderFooterPolicy;
 import org.apache.poi.xwpf.usermodel.*;
@@ -12,7 +15,6 @@ import org.openxmlformats.schemas.wordprocessingml.x2006.main.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -133,32 +135,31 @@ public class Docx4jUtilsTest {
         Docx4jUtils.convertDocxToPdf(DOCX_FILE, PDF_FILE);
     }
     @Test
-    public void test3() throws Exception {
-        FileOutputStream fileOutputStream = new FileOutputStream(DOCX_FILE);
-        XWPFDocument document = new XWPFDocument();
-        XWPFParagraph titleParagraph = document.createParagraph();
-        titleParagraph.setAlignment(ParagraphAlignment.CENTER);
-        XWPFRun titleParagraphRun = titleParagraph.createRun();
-        titleParagraphRun.setText("Title");
-        titleParagraphRun.setColor("000000");
-        titleParagraphRun.setBold(true);
-        titleParagraphRun.setFontFamily("宋体");
-        titleParagraphRun.setFontSize(20);
-        XWPFParagraph firstParagraph = document.createParagraph();
-        firstParagraph.setAlignment(ParagraphAlignment.LEFT);
-        XWPFRun run = firstParagraph.createRun();
-        run.addBreak();
-        run.setText("TEST");
-        run.setColor("000000");
-        titleParagraphRun.setFontFamily("宋体");
-        run.setFontSize(16);
-        XWPFParagraph secondParagraph = document.createParagraph();
-        XWPFRun secondRun = secondParagraph.createRun();
-        secondRun.setText("HELLO");
-        secondRun.setColor("000000");
-        titleParagraphRun.setFontFamily("宋体");
-        secondRun.setFontSize(16);
-        document.write(fileOutputStream);
-        Docx4jUtils.convertDocxToPdf(DOCX_FILE, PDF_FILE);
+    public void test6() throws Exception {
+        @Cleanup XWPFDocument document = new XWPFDocument();
+        PoiUtils.setTitle(document, "Title");
+        PoiUtils.setParagraph(document, "HELLO WORLD!");
+        PoiUtils.setParagraph(document, "测试");
+        PoiUtils.write(document, DOCX_FILE);
+    }
+    @SuppressWarnings("unchecked")
+    @Test
+    public void test7() throws Exception {
+        @Cleanup XWPFDocument document = new XWPFDocument();
+        CTSectPr ctPageSz = PoiUtils.getCtPageSz(document);
+        //A4:宽210毫米(11907twip),长297毫米(16839.9twip)
+        PoiUtils.setPadding(ctPageSz, STPageOrientation.LANDSCAPE, BigInteger.valueOf(11907), BigInteger.valueOf(16840));
+        PoiUtils.setPadding(ctPageSz, BigInteger.valueOf(720L), BigInteger.valueOf(1440L));
+        PoiUtils.setTitle(document, "励志名言100句", 25);
+        //相当于换行
+        document.createParagraph();
+        List<String> stringList = (List<String>) FileUtils.readLines(EksFileUtils.getFileBaseProject("extra/temp/temp.txt"));
+        for(String string : stringList){
+            if (StringUtils.isBlank(string)){
+                continue;
+            }
+            PoiUtils.setParagraph(document, string.trim(), 16, BigInteger.valueOf(300L), BigInteger.valueOf(300L) ,BigInteger.valueOf(300L));
+        }
+        PoiUtils.write(document, DOCX_FILE);
     }
 }
